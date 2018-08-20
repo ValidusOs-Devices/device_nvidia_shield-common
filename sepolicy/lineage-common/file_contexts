@@ -12,8 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-unix_socket_connect(system_server, gps, gpsd)
-allow system_server gps_device:chr_file rw_file_perms;
+/dev/socket/gps		        u:object_r:gps_socket:s0
+/data/gps(/.*)?		        u:object_r:gps_data_file:s0
+(/system)?/vendor/bin/glgps_nvidiaTegra2android	u:object_r:gpsd_exec:s0
+(/system)?/vendor/bin/gps_select.sh		u:object_r:gpsd_exec:s0
+/sys/devices/platform/pwm-backlight/backlight/pwm-backlight/brightness	u:object_r:sysfs_pwm_backlight:s0
 
-allow system_server sysfs_pwm_backlight:file rw_file_perms;
-allow system_server sysfs_smartdimmer:file rw_file_perms;
+# TEE
+(/system)?/vendor/bin/tf_daemon	u:object_r:tee_exec:s0
+
+# Updater
+/dev/block/platform/sdhci-tegra(.*)/by-name/MSC		u:object_r:misc_block_device:s0
+/dev/block/platform/tegra-sata(.*)/by-name/MSC		u:object_r:misc_block_device:s0

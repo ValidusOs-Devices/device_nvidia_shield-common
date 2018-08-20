@@ -1,4 +1,4 @@
-# Copyright (c) 2017, NVIDIA CORPORATION.  All rights reserved.
+# Copyright (C) 2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,11 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# allow backlight HAL to adjust lcd panel brightness
-allow hal_light_default sysfs_class_backlight:file  rw_file_perms;
-allow hal_light_default sysfs_class_backlight:dir  rw_dir_perms;
+# Used by nvcpl
+allow untrusted_app_all system_app_service:service_manager find;
 
-# allow backlight HAL to read/write below backlight I2C bus node
-# e.x /sys/devices/(*).i2c/i2c-(*)/backlight/pwm-backlight/brightness
-allow hal_light_default sysfs_nvi2c:file  rw_file_perms;
-allow hal_light_default sysfs_nvi2c:dir  rw_dir_perms;
+# Used by various apps for license checks
+allow untrusted_app_all tsec_device:chr_file rw_file_perms;

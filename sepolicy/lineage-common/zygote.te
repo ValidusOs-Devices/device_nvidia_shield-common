@@ -1,4 +1,4 @@
-# Copyright (c) 2017, NVIDIA CORPORATION.  All rights reserved.
+# Copyright (C) 2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,12 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-######################################
-# Attribute declarations
-#
-
-# HAL Shieldtech
-attribute hal_shieldtech;
-attribute hal_shieldtech_client;
-attribute hal_shieldtech_server;
-
+get_prop(zygote, surfaceflinger_prop)
